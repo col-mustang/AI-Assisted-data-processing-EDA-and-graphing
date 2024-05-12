@@ -10,7 +10,7 @@ st.set_page_config(
 
 st.write("""# 👋 Welcome to Plotly 👋
 ### Web-Based Application to Automate Graphing and Exploratory Data Analysis
-### Project 3 ASU AI Course: Geoff McDaniels, Doug Francis
+### Project 3 ASU AI Course: Geoff McDaniel, Chris Alvarez, Doug Francis
          
 ##### Version 0.1 """)
 

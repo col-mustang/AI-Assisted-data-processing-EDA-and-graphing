@@ -11,8 +11,6 @@ import pdb
 import time
 
 
-
-
 st.set_page_config(
     layout="wide",
     page_title="👋 Initial Processing Screen 👋",
@@ -25,6 +23,85 @@ st.write("""### Project 3 ASU AI Course: Automated Graphing and Exploratory Data
 Select csv file. It will upload to a dataframe, df_initial, Then go to "2 Build and Display Graphs"
 """)
 
+
+def get_data_definition(df):
+    df_definition = pd.DataFrame(df.dtypes.values, index=df.dtypes.index, columns=["Data Type"]).reset_index()
+    df_definition.columns = ["Feature", "Data Type"]
+    return df_definition
+
+def init_default_graph_file():
+    return "3_the_graphs.py"
+
+def init_new_graph_file(new_graph_file_name):
+    # zzz pick it up here!!!
+    st.session_state['graph_file_name'] = new_graph_file_name
+    # pdb.set_trace()
+    junk_result_for_now = add_starter_text_to_new_graph_file(new_graph_file_name)
+    return True
+
+def add_starter_text_to_new_graph_file(graph_file_name):
+    # write out the graphing file
+    # pdb.set_trace()
+    with open("pages/" + graph_file_name, "w") as f:
+        f.write("""import matplotlib.pyplot as plt
+import streamlit as st
+import pandas as pd
+import numpy as np
+import io
+
+st.set_page_config(
+    page_title="Hello",
+    layout="wide"
+)
+
+
+# Assuming you have a pandas DataFrame named 'df_initial'
+if 'graphs_made' not in st.session_state:
+    st.write("Program error: Graph_made is notin the session state. Graphing will not work!")
+else:
+    df_initial = st.session_state['df_initial']
+
+    # present pop up options for summary stats
+    col1, col2 = st.columns(2)
+    with col1:
+        with st.popover("Summary stats: dataframe info"):
+            st.write(f"Summary for dataframe: df_initial")
+            buffer = io.StringIO() 
+            df_initial.info(buf=buffer)
+            s = buffer.getvalue()  
+            st.text(f"#### {s}")
+    with col2:
+        with st.popover("Summary stats: shape and value_counts"):
+            st.text("")
+            st.write("The shape is: ")
+            st.text(df_initial.shape)
+            st.text(f"dataframe df_initial value_counts...")
+            for the_col in df_initial.columns:
+                st.write("dataframe df_initial value_counts are...")
+                st.text(df_initial[the_col].value_counts())
+
+# new code below here
+
+                
+""")
+        f.close()
+        st.session_state['graph_file_name'] = graph_file_name
+    return True
+
+
+def clean_up_graph_f_name(f_name_to_clean):
+    if ".py" in f_name_to_clean.lower():
+        return(f_name_to_clean)
+    else:
+        if "." not in f_name_to_clean:
+            cleaned_f_name = f_name_to_clean + ".py"
+            return(cleaned_f_name)
+        else:   # not a good file name
+            st.write(f"## Invalid file name {f_name_to_clean}. Could not initialize new graph file")
+            return(init_default_graph_file())
+
+## ---- Main Flow -----------
+
 # initialize variables
 if 'file_name' in st.session_state:
     file_name = st.session_state['file_name']
@@ -32,11 +109,6 @@ if 'file_name' in st.session_state:
 container_1 = st.empty()
 with container_1:
     uploaded_file = st.file_uploader("Choose a file")
-
-def get_data_definition(df):
-    df_definition = pd.DataFrame(df.dtypes.values, index=df.dtypes.index, columns=["Data Type"]).reset_index()
-    df_definition.columns = ["Feature", "Data Type"]
-    return df_definition
 
 if uploaded_file is not None:  
     file_name = uploaded_file.name
@@ -51,40 +123,69 @@ if uploaded_file is not None:
     df_initial.to_csv(dir_and_raw_file_name, index=False)
 
   
-  
 if 'df_initial_loaded' in st.session_state and st.session_state['df_initial_loaded']:
+    # Get and write out the data definition
     df_definition = get_data_definition(df_initial)
     st.write(f"#### Data Definition for {file_name}")
     st.write("Here is the data definition")
     st.dataframe(df_definition)
     st.write("the data...")
     st.dataframe(df_initial)
+    # update session statewith df_definition info
     st.session_state['df_definition_loaded'] = True  
     st.session_state['df_definition'] = df_definition
-    the_request = st.text_area("Enter your graphing request here")
-    st.write("your requested: ", the_request)
 
-    # df.info() does not return anything to python, so need to pipe it
-    with st.popover("Summary stats for loaded dataframe"):
-        st.write(f"Summary for file {file_name} (dataframe: df_initial)")
-        buffer = io.StringIO() 
-        df_initial.info(buf=buffer)
-        s = buffer.getvalue()  
-        st.text(f"#### {s}")
-        st.text("\n")
-        st.write(f"The shape is: \n{df_initial.shape}")
-        st.text(f"dataframe df_initial value_counts...")
-        for the_col in df_initial.columns:
-            st.text(f"dataframe df_initial value_counts are...\n{df_initial[the_col].value_counts()}")
+    # present pop up options for summary stats
+    col1, col2 = st.columns(2)
+    with col1:
+        with st.popover("Summary stats: dataframe info"):
+            st.write(f"Summary for file {file_name} (dataframe: df_initial)")
+            buffer = io.StringIO() 
+            df_initial.info(buf=buffer)
+            s = buffer.getvalue()  
+            st.text(f"#### {s}")
+    with col2:
+        with st.popover("Summary stats: shape and value_counts"):
+            st.text("\n")
+            st.write(f"The shape is: \n{df_initial.shape}")
+            st.text(f"dataframe df_initial value_counts...")
+            for the_col in df_initial.columns:
+                st.text(f"dataframe df_initial value_counts are...\n{df_initial[the_col].value_counts()}")
     
-    # container_2 = st.empty()
-    # with container_2:
-   
-    if st.button(":blue[READY: Proceed to 'Preprocessing?] Click to proceed"):
+    
+    # if not defined, set up the graph file
+    if 'graph_file_name' not in st.session_state:
+        graph_file_name = init_default_graph_file() 
+        st.session_state['graph_file_name'] = graph_file_name
+        graph_file_bool = True
+    else:
+        graph_file_name = st.session_state['graph_file_name']
+        graph_file_bool = True
+
+    # provide opportunity to change the graph file name
+    new_graph_file_name = ""   # initialize to empty string
+    new_graph_file_name = st.text_input("If you need a new graph file, enter the new file name", value="3_the_graphs.py")
+    new_graph_file_name = clean_up_graph_f_name(new_graph_file_name)
+    # NOTE: if file name doesn't pass basic check (very basic check), then new_file_name will just be the default file name
+    # that's what clean_up_graph_f_name will return if there is an issue
+    
+    if (len(new_graph_file_name) > 0) and (new_graph_file_name != graph_file_name):
+        # received new graph file name
+        # check if .py is in the name
+        # pdb.set_trace()
+        graph_file_bool = init_new_graph_file(new_graph_file_name)
+        graph_file_name = new_graph_file_name   # important they are the same so repeatof this section of code does not happen
+
+    if graph_file_bool:
+        # Git the graphing request
+        the_request = ""  # initialize first to empty string
+        the_request = st.text_area("Enter your graphing request here")
         if len(the_request) > 0:
             st.session_state['the_request'] = the_request
-            st.session_state['new_request'] = True
-            st.switch_page(("pages/2 create_graphs.py"))
-        else:
-            st.write("## Please enter a graphing request before proceeding")
+            if st.button("Have your request... :blue[Click to produce graph]"):
+                st.session_state['new_request'] = True
+                st.switch_page(("pages/2 create_graphs.py"))
+    else:
+        st.write("### Could not initialize new graph file")
+       
    

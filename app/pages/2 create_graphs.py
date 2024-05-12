@@ -62,15 +62,15 @@ else:
     
 # see if we are ready to create a graph
 if ('the_request' in st.session_state) and ('df_definition' in st.session_state) and \
-    ('new_request' in st.session_state) and st.session_state['new_request']:
+    ('new_request' in st.session_state) and st.session_state['new_request'] and ('graph_file_name' in st.session_state):
     # pdb.set_trace()
     the_request = st.session_state['the_request']
     st.write(f"the request is: {the_request}")
     
     # Define the paths.
-    search_path = os.path.join(os.getcwd(), "pages")
-    print(f"the search path is {search_path}")
-    graph_file = os.path.join(search_path,"3_the_graphs.py")
+    # search_path = os.path.join(os.getcwd(), "pages")
+    
+    graph_file = "pages/" + st.session_state['graph_file_name']
     print(f"the graph file is {graph_file}")
     
     # load the key
@@ -134,6 +134,7 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
         with open(the_file_name, "a") as f:
             f.write(state["graph_source"])
             f.close()
+        st.session_state["graphs_made"] = True
         return state
 
     # Add a node to for discovery.
