@@ -76,12 +76,15 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
     # load the key
     load_dotenv(find_dotenv())
 
-    together_api_key = os.environ.get("TOGETHER_API_KEY")
-    print(together_api_key)
+    # together_api_key = os.environ.get("TOGETHER_API_KEY")
+    # print(together_api_key)
+    Open_AI_API_KEY = os.environ.get("Open_AI_API_KEY")
 
-    llm = ChatOpenAI(base_url="https://api.together.xyz/v1",
-    api_key=together_api_key,
-    model="deepseek-ai/deepseek-coder-33b-instruct")
+    llm = ChatOpenAI(api_key=Open_AI_API_KEY, model="gpt-4")
+
+    # llm = ChatOpenAI(base_url="https://api.together.xyz/v1",
+    # api_key=together_api_key,
+    # model="deepseek-ai/deepseek-coder-33b-instruct")
 
     class AgentState(TypedDict):
         data_definition: pd.DataFrame
@@ -95,13 +98,13 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
     user_prompt_template = """ {the_request}"""
 
     system_prompt_template = """You will be writing code in python to create a plot in Streamlit using matplotlib.pyplot.  
-    The final figure will also be displayed using the Streamlit command st.pyplot(fig1).  Note that st.pyplot() with no
+    In the code, display the final figure using the Streamlit command st.pyplot(fig1).  Note that st.pyplot() with no
     arguments is deprecistaed. Start you plot definition with ```fig1, ax1 = plt.subplots()```. After showing the plot with 
-    ```st.pyplot(fig1)```. Since other plots will be added to the same figure, do not use plt.show() and always add 
-    ```fig1.clf()```. The data to use is in the dataframe df_initial. Do not use any other dataframes in your code.  
-    Here is a table with the data definition, {data_definition}. 
+    ```st.pyplot(fig1)```, end your code with  ```fig1.clf()```. The data to use is in the dataframe df_initial. If you need to 
+    filter data or subset it, etc. then you can make another dataframe from df_initial. Do not alter df_initial. 
+    Here is the data definition {data_definition}, you will be working with. 
 
-    Any request must use one or more of these columns. Reply with the source code for the test only. 
+    Any request must use one or more of these columns from the data definition. Reply with the source code only. 
     Do not include the ```import``` statements in your response. I will add the import statements myself.
     
     """
