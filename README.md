@@ -3,7 +3,7 @@ AI Assisted data processing, EDA and graphing
 
 ## Introduction
 
-Welcome to our project repository! This project aims to [briefly describe the project goal and context]. Our focus has been on [mention the broad technology or approach used, like machine learning, NLP, etc.] to achieve [specific objectives or outcomes].
+Welcome to our project repository! This project aims to create a user-friendly, web-based application that facilitates automatic generation of custom graphs for any given tabular dataset through simple voice commands or text prompts. This technology will enable users to engage with data analysis in a more intuitive and efficient manner, significantly reducing the manual effort involved in data processing. Our focus has been on [mention the broad technology or approach used, like machine learning, NLP, etc.] to achieve [specific objectives or outcomes].
 
 ## Table of Contents
 
@@ -14,29 +14,67 @@ Welcome to our project repository! This project aims to [briefly describe the pr
 - [Future Work](#future-work)
 - [Contributors](#contributors)
 
-## Project Setup
+## Built With
+- Visual Studio Code - The source code editor used for development.
+- GitHub Copilot - AI assistant that helps in writing better code.
+- ChatGPT - AI model for generating documentation and guidance.
+- Perplexity - AI assistant that helps generate and write cleaner code.
+- Streamlit - Web framework is specifically tailored for data science applications, allowing Python developers to easily build and deploy web applications. Streamlit will serve as the foundation for our web-based interface, ensuring a seamless user experience.
 
-To get started with this project, please follow the steps below:
+## Location of the Code and Write Up
 
-1. **Clone the Repository:**
-   ```bash
-   git clone [https://github.com/DougInVentura/AI_Course_Project_3_Team_1]
-   ```
-2. **Install Required Libraries:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Run the Jupyter Notebook:**
-   Navigate to the notebook directory and start the Jupyter Notebook to explore data preparation steps:
-   ```bash
-   jupyter notebook data_preparation.ipynb
-   ```
-4. **Execute the Model Script:**
-   Run the script to train and evaluate the model:
-   ```bash
-   python train_model.py
-   ```
+The file is in the root directory of the Git repository. The file name is "Attrition.ipynb". At the end of the file there are a few questions about the results that are answered. 
 
+## Getting Started
+
+The steps below should get you started to get this project up and running on your local machine.
+
+### Prerequisites
+
+The following are prerequisites for this project. Instructions for pip installation are provided for each of the packages.
+
+* Python - This project was created using Python version 3.11.5. Package compatability has not been tested with other versions of Python. See https://www.digitalocean.com/community/tutorials/install-python-windows-10 as a reference for Python installation.
+
+
+* pandas (my version is 2.0.3)
+  ```sh
+  pip install pandas
+  ```
+* tensorflow (my version is 2.13.1)
+  ```sh
+  pip install tensorflow[and-cuda] - if using a compatable GPU
+
+  or 
+
+  pip install tensorflow-cpu - if using only your cpu
+  ```
+* sklearn (my version is 1.4.1.post1)
+  ```sh
+  pip install -U scikit-learn
+  Note: scikit-lean installation encourages the use of a virtual environment. See https://scikit-learn.org/stable/install.html
+  ```
+* numpy (my version is 1.24.3)
+  ```sh
+  pip install numpy
+  ```
+* keras (my version is 2.13.1)
+  ```sh
+  keras will be automatically installed when you install tensorflow. While it can be installed separately, it is recommended to just use the pip installation of tensor flow to install keras.
+  ```
+
+### Installation and Running
+
+_In addition to setting up Python and the required packages, perform the following steps._
+
+1. Clone the repository on your local machine
+   ```sh
+   git clone https://github.com/DougInVentura/neural-network-challenge-2.git
+   ```
+2. Open the folder corresponding to neural-network-challenge where you installed in using the repo clone above.
+
+3. Open the file "attrition.ipynb"
+
+4. Make the modifications you desired. Run cell by cell or run the entire Jupyter notebook.
 ## Data Collection and Cleaning
 
 Describe the sources of your data and the methodology used to clean and preprocess it. This section could include:
@@ -62,7 +100,13 @@ Discuss potential improvements or next steps for the project if more time and re
 - Trying different model architectures or algorithms
 - Deploying the model as a web or mobile application
 
-## Contributors
+## Authors
 - Chris Alvarez
 - Doug Francis
 - Geoff McDaniel
+
+## License
+This project is not licensed and is available for educational and non-commercial use only
+
+## Acknoeledgments
+Big shoutout to our instructor Firas, and of course, Sean, for their awesome support with our project. Our profs laid down the basics, making sure we got the hang of data analysis. All together, they've been the dream team behind our data analysis skills, and we couldn't be more grateful.
