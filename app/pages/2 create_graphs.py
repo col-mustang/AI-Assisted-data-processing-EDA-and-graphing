@@ -34,6 +34,7 @@ st.write("""### Project 3 ASU AI Course: Automated Graphing and Exploratory Data
 st.write(f"the dir is: {os.getcwd()}")
 
 def extract_code_from_message(message):
+    # pdb.set_trace()
     lines = message.split("\n")
     code = ""
     in_code = False
@@ -42,6 +43,7 @@ def extract_code_from_message(message):
             in_code = not in_code
         elif in_code:
             code += line + "\n"
+    st.write(f"### The extracted code is: {code}")
     return code
 
 if 'df_definition' in  st.session_state:
@@ -71,7 +73,7 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
     # search_path = os.path.join(os.getcwd(), "pages")
     
     graph_file = "pages/" + st.session_state['graph_file_name']
-    print(f"the graph file is {graph_file}")
+    st.write(f"The graph file is {graph_file}")
     
     # load the key
     load_dotenv(find_dotenv())
@@ -79,8 +81,8 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
     # together_api_key = os.environ.get("TOGETHER_API_KEY")
     # print(together_api_key)
     Open_AI_API_KEY = os.environ.get("Open_AI_API_KEY")
-
-    llm = ChatOpenAI(api_key=Open_AI_API_KEY, model="gpt-4")
+    # pdb.set_trace()
+    llm = ChatOpenAI(api_key=Open_AI_API_KEY, model="gpt-4o")
 
     # llm = ChatOpenAI(base_url="https://api.together.xyz/v1",
     # api_key=together_api_key,
@@ -91,6 +93,7 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
         the_request: List[str]
         graph_source: str
         graph_file: str
+        llm_message: str
 
     # Create the graph.
     workflow = StateGraph(AgentState)
@@ -111,11 +114,13 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
 
     def generate_graph_code(state: AgentState):
         # pdb.set_trace()
+        st.write("debug: in generate_graph_code")
         state["graph_file"] = graph_file
         st.write(f"the graph file is: {state['graph_file']}")
         state["graph_source"] = ""
         state["data_definition"] = data_definition
         state["the_request"] = the_request
+        # zzz check out the_request. should this come from the LangChain 'State'?
 
         user_prompt = user_prompt_template.format(the_request=the_request)
 
@@ -126,15 +131,22 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
 
 
         message = llm.invoke([system_message, human_message]).content
-        st.write(f"the message is: {message}")
+        
+        state["llm_message"] = message
+        # pdb.set_trace()
         code = extract_code_from_message(message)
         state["graph_source"] = "\n\n" + code + "\n\n"
         return state
 
     def write_graph_code(state: AgentState):
+        st.write("debug: in write_graph_code")
+        # zzz add here.
+        # st.write(f"### The message from the LLM is: {message}")
         # pdb.set_trace()
+        the_request = state["the_request"]
         the_file_name = state["graph_file"]
         with open(the_file_name, "a") as f:
+            f.write(f"\n st.write('## **{the_request}**')\n")
             f.write(state["graph_source"])
             f.close()
         st.session_state["graphs_made"] = True
@@ -187,4 +199,4 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
         st.write("Just before rerun")
        
     except GraphRecursionError:
-        print("Graph recursion limit reached.")
+        st.write("### *Graph recursion limit reached*")

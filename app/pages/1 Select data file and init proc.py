@@ -9,6 +9,7 @@ import os
 import io
 import pdb
 import time
+from shutil import copyfile
 
 
 st.set_page_config(
@@ -30,6 +31,8 @@ def get_data_definition(df):
     return df_definition
 
 def init_default_graph_file():
+    # copy the 'pages/template/graph_file_template.py' to pages/graph_file_template.py
+    copyfile("templates/graph_file_template.py", "pages/3_the_graphs.py")
     return "3_the_graphs.py"
 
 def init_new_graph_file(new_graph_file_name):
@@ -54,10 +57,11 @@ st.set_page_config(
     layout="wide"
 )
 
+st.write('### Project 3 ASU AI Course: Graphing Page')
 
 # Assuming you have a pandas DataFrame named 'df_initial'
 if 'graphs_made' not in st.session_state:
-    st.write("Program error: Graph_made is notin the session state. Graphing will not work!")
+    st.write("Program error: 'Graph_made' variable is not defined in the session state. Graphing will not work!")
 else:
     df_initial = st.session_state['df_initial']
 
@@ -111,12 +115,15 @@ with container_1:
     uploaded_file = st.file_uploader("Choose a file")
 
 if uploaded_file is not None:  
+    # zzz should add a conditional. If df_initial_loaded, then why reload. Just get it from the session state.
+    st.write(" in select data page; if uploaded_file is not None")
     file_name = uploaded_file.name
     st.session_state['file_name'] = file_name
     df_initial = pd.read_csv(uploaded_file, index_col=False)
     st.session_state['new_file'] = True
     st.session_state['df_initial'] = df_initial
     st.session_state['df_initial_loaded'] = True
+    # pdb.set_trace()
     st.write(f"#### Working with file :blue[{file_name}]")
     # write out entire dataframe w RAW_ suffix
     dir_and_raw_file_name = "data/" + "RAW_" + file_name
@@ -173,6 +180,7 @@ if 'df_initial_loaded' in st.session_state and st.session_state['df_initial_load
         # received new graph file name
         # check if .py is in the name
         # pdb.set_trace()
+        st.write(f"a new graph file -> {new_graph_file_name}")
         graph_file_bool = init_new_graph_file(new_graph_file_name)
         graph_file_name = new_graph_file_name   # important they are the same so repeatof this section of code does not happen
 

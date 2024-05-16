@@ -12,7 +12,7 @@ st.write("""# 👋 Welcome to Plotly 👋
 ### Web-Based Application to Automate Graphing and Exploratory Data Analysis
 ### Project 3 ASU AI Course: Geoff McDaniel, Chris Alvarez, Doug Francis
          
-##### Version 0.1 """)
+##### Version 0.3 """)
 
 
 if st.button(":blue[Click Here] to select a csv file with your data to begin"):
