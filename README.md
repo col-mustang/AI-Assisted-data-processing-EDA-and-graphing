@@ -12,7 +12,7 @@ Welcome to our project repository! This project aims to create a user-friendly, 
 - [Model Implementation and Optimization](#model-implementation-and-optimization)
 - [Results](#results)
 - [Future Work](#future-work)
-- [Contributors](#contributors)
+- [Authors](#Authors)
 
 ## Built With
 - Visual Studio Code - The source code editor used for development.
