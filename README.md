@@ -13,6 +13,7 @@ Welcome to our project repository! This project aims to create a user-friendly, 
 - [Results](#results)
 - [Future Work](#future-work)
 - [Authors](#Authors)
+- [Acknowledgments](#Acknowledgments)
 
 ## Built With
 - Visual Studio Code - The source code editor used for development.
@@ -108,5 +109,5 @@ Discuss potential improvements or next steps for the project if more time and re
 ## License
 This project is not licensed and is available for educational and non-commercial use only
 
-## Acknoeledgments
+## Acknowledgments
 Big shoutout to our instructor Firas, and of course, Sean, for their awesome support with our project. Our profs laid down the basics, making sure we got the hang of data analysis. All together, they've been the dream team behind our data analysis skills, and we couldn't be more grateful.
