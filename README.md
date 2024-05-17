@@ -100,6 +100,13 @@ This section explains the model(s) used, including any additional libraries or t
 - Iterative improvements and optimizations made
 - Final model configuration and performance metrics
 
+## Visualizations
+
+![image](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/168fb6df-ace1-4ece-9c68-793fab614450)
+
+![image](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/c5c5dc4c-9741-4f9f-92d9-c8a9057752ae)
+
+
 ## Results
 
 Summarize the model's performance and the conclusions drawn from applying the model to your data. Include key metrics that highlight the model's effectiveness.
@@ -112,10 +119,10 @@ Discuss potential improvements or next steps for the project if more time and re
 - Deploying the model as a web or mobile application
 
 ## Authors
-- Chris Alvarez
-- Doug Francis
-- Geoff McDaniel
-
+- Chris Alvarez - Presenation visualization, Data collection, preprocessing, and application deployment
+- Doug Francis - Feature/data engineering, model evaluation, model deployment, and documentation
+- Geoff McDaniel - Feature/data engineering, model evaluation, and voice capture widget deployment
+  
 ## License
 This project is not licensed and is available for educational and non-commercial use only
 
