@@ -101,6 +101,7 @@ This section explains the model(s) used, including any additional libraries or t
 - Final model configuration and performance metrics
 
 ## Visualizations
+3D Plotting 
 
 ![image](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/168fb6df-ace1-4ece-9c68-793fab614450)
 
