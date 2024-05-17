@@ -79,7 +79,7 @@ _In addition to setting up Python and the required packages, perform the followi
 
 1. Clone the repository on your local machine
    ```sh
-   git clone https://github.com/DougInVentura/neural-network-challenge-2.git
+   git clone https://github.com/DougInVentura/AI_Course_Project_3_Team_1)
    ```
 2. Open the folder corresponding to app where you installed in using the repo clone above.
 
