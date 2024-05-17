@@ -72,7 +72,6 @@ The following are prerequisites for this project. Instructions for pip installat
   ```sh
   keras will be automatically installed when you install tensorflow. While it can be installed separately, it is recommended to just use the pip installation of tensor flow to install keras.
   ```
-
 ### Installation and Running
 
 _In addition to setting up Python and the required packages, perform the following steps._
@@ -109,6 +108,9 @@ This section explains the model(s) used, including any additional libraries or t
 
 
 ## Results
+
+[
+](https://cdgproject3plotly.streamlit.app/)
 
 Summarize the model's performance and the conclusions drawn from applying the model to your data. Include key metrics that highlight the model's effectiveness.
 
