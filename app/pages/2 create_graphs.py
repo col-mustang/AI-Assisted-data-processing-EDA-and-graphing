@@ -69,10 +69,8 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
     the_request = st.session_state['the_request']
     st.write(f"the request is: {the_request}")
     
-    # Define the paths.
-    # search_path = os.path.join(os.getcwd(), "pages")
-    
     graph_file = "pages/" + st.session_state['graph_file_name']
+    # debug
     st.write(f"The graph file is {graph_file}")
     
     # load the key
@@ -97,19 +95,19 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
 
     # Create the graph.
     workflow = StateGraph(AgentState)
+    pdb.set_trace()
+    workflow.the_request = the_request
 
     user_prompt_template = """ {the_request}"""
 
     system_prompt_template = """You will be writing code in python to create a plot in Streamlit using matplotlib.pyplot.  
     In the code, display the final figure using the Streamlit command st.pyplot(fig1).  Note that st.pyplot() with no
-    arguments is deprecistaed. Start you plot definition with ```fig1, ax1 = plt.subplots()```. After showing the plot with 
-    ```st.pyplot(fig1)```, end your code with  ```fig1.clf()```. The data to use is in the dataframe df_initial. If you need to 
+    arguments is depreciated. Start you plot definition with ```fig1, ax1 = plt.subplots()```. After showing the plot with 
+    ```st.pyplot(fig1)```, end your code with  ```fig1.clf()```. The data to use is in the dataframe df_initial, which is already populated. If you need to 
     filter data or subset it, etc. then you can make another dataframe from df_initial. Do not alter df_initial. 
     Here is the data definition {data_definition}, you will be working with. 
 
     Any request must use one or more of these columns from the data definition. Reply with the source code only. 
-    Do not include the ```import``` statements in your response. I will add the import statements myself.
-    
     """
 
     def generate_graph_code(state: AgentState):
@@ -136,6 +134,7 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
         # pdb.set_trace()
         code = extract_code_from_message(message)
         state["graph_source"] = "\n\n" + code + "\n\n"
+        st.write(f"### The message from the LLM is: \n{message}")
         return state
 
     def write_graph_code(state: AgentState):
@@ -145,8 +144,11 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
         # pdb.set_trace()
         the_request = state["the_request"]
         the_file_name = state["graph_file"]
+        # append the code to the file along with the request
         with open(the_file_name, "a") as f:
-            f.write(f"\n st.write('## **{the_request}**')\n")
+            # make sure the first letter is capitalized
+            the_request[0] = the_request[0].upper()
+            f.write(f"st.write('### **{the_request}**')\n")
             f.write(state["graph_source"])
             f.close()
         st.session_state["graphs_made"] = True
@@ -173,6 +175,7 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
     def should_continue(state: AgentState):
         return "end"
     
+    # if we wanted checking of the code, we would add a conditional edge here
     # Add the conditional edge.
     # workflow.add_conditional_edges(
     #     "generate_graph_code",
