@@ -38,137 +38,94 @@ else:
 
 # new code below here
 
-st.write("### **The Request: Create a plot of x=tenure, y=internet_charge_per_min and color it by churn.  Create x and y labels. Add a legend for churn color.**")
+st.write("""### **The Request: Generate a scatter plot with two series. Series 1: x= game_abs and y = pts for Player = Jordan and Series 2: x= game_abs and y = pts for Player = Lebron.  Use sklearn library to generate a regression line for both series. Annotate the regression lines with the Players.**""")
+
+
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Filter data for Jordan and Lebron
+jordan_data = df_initial[df_initial['Player'] == 'Jordan']
+lebron_data = df_initial[df_initial['Player'] == 'Lebron']
+
+# Create the plot
+fig1, ax1 = plt.subplots()
+
+# Jordan scatter plot
+ax1.scatter(jordan_data['game_abs'], jordan_data['pts'], label='Jordan', color='blue')
+
+# Lebron scatter plot
+ax1.scatter(lebron_data['game_abs'], lebron_data['pts'], label='Lebron', color='red')
+
+# Regression for Jordan
+X_jordan = jordan_data['game_abs'].values.reshape(-1, 1)
+y_jordan = jordan_data['pts'].values.reshape(-1, 1)
+regressor_jordan = LinearRegression()
+regressor_jordan.fit(X_jordan, y_jordan)
+y_pred_jordan = regressor_jordan.predict(X_jordan)
+ax1.plot(jordan_data['game_abs'], y_pred_jordan, color='blue')
+ax1.annotate('Jordan', xy=(jordan_data['game_abs'].iloc[-1], y_pred_jordan[-1]), color='blue')
+
+# Regression for Lebron
+X_lebron = lebron_data['game_abs'].values.reshape(-1, 1)
+y_lebron = lebron_data['pts'].values.reshape(-1, 1)
+regressor_lebron = LinearRegression()
+regressor_lebron.fit(X_lebron, y_lebron)
+y_pred_lebron = regressor_lebron.predict(X_lebron)
+ax1.plot(lebron_data['game_abs'], y_pred_lebron, color='red')
+ax1.annotate('Lebron', xy=(lebron_data['game_abs'].iloc[-1], y_pred_lebron[-1]), color='red')
+
+# Add legend and labels
+ax1.legend()
+ax1.set_xlabel('Game Absolute')
+ax1.set_ylabel('Points')
+ax1.set_title('Points by Game Absolute for Jordan and Lebron')
+
+# Display the plot in Streamlit
+st.pyplot(fig1)
+
+# Clear the figure to free memory
+fig1.clf()
+
+
+st.write("### **The Request: Generate overlapping histograms for the variable fgp for Player = Jordan versus Player = Lebron. Add an annotation for the average fgp for Player = Jordan versus average fgp for Player = Lebron.**")
 
 
 import streamlit as st
 import matplotlib.pyplot as plt
+import pandas as pd
 
-# Assuming df_initial is already available and populated
+# Assuming df_initial is already populated
+df_jordan = df_initial[df_initial['Player'] == 'Jordan']
+df_lebron = df_initial[df_initial['Player'] == 'Lebron']
 
 fig1, ax1 = plt.subplots()
 
-# Scatter plot
-scatter = ax1.scatter(df_initial['tenure'], df_initial['internet_charge_per_min'], c=df_initial['churn'], cmap='viridis', label=df_initial['churn'])
+# Plot histograms
+ax1.hist(df_jordan['fgp'], bins=15, alpha=0.5, label='Jordan')
+ax1.hist(df_lebron['fgp'], bins=15, alpha=0.5, label='Lebron')
 
-# Labels
-ax1.set_xlabel('Tenure')
-ax1.set_ylabel('Internet Charge Per Min')
+# Calculate and annotate average fgp
+avg_jordan = df_jordan['fgp'].mean()
+avg_lebron = df_lebron['fgp'].mean()
 
-# Legend
-legend1 = ax1.legend(*scatter.legend_elements(), title="Churn")
-ax1.add_artist(legend1)
+ax1.axvline(avg_jordan, color='blue', linestyle='dashed', linewidth=1)
+ax1.axvline(avg_lebron, color='orange', linestyle='dashed', linewidth=1)
+ax1.text(avg_jordan, max(ax1.get_ylim())*0.9, f'Avg Jordan: {avg_jordan:.2f}', color='blue')
+ax1.text(avg_lebron, max(ax1.get_ylim())*0.8, f'Avg Lebron: {avg_lebron:.2f}', color='orange')
+
+ax1.set_xlabel('Field Goal Percentage (fgp)')
+ax1.set_ylabel('Frequency')
+ax1.set_title('Histogram of Field Goal Percentage for Jordan vs Lebron')
+ax1.legend()
 
 # Display plot in Streamlit
 st.pyplot(fig1)
 
-# Clear the figure
+# Clear the figure after displaying
 fig1.clf()
-
-
-st.write("### **The Request: Create overlapping histograms for number_customer_service_calls for churn=0 versus churn=1. Since the are many more data rows where churn=0, convert the data to relative frequency**")
-
-
-import streamlit as st
-import matplotlib.pyplot as plt
-
-# Filter the data for churn=0 and churn=1
-df_churn_0 = df_initial[df_initial['churn'] == 0]
-df_churn_1 = df_initial[df_initial['churn'] == 1]
-
-# Create the histograms
-fig1, ax1 = plt.subplots()
-
-# Plot the histograms
-ax1.hist(df_churn_0['number_customer_service_calls'], bins=10, alpha=0.5, label='Churn=0', density=True)
-ax1.hist(df_churn_1['number_customer_service_calls'], bins=10, alpha=0.5, label='Churn=1', density=True)
-
-# Add titles and labels
-ax1.set_title('Number of Customer Service Calls by Churn Status')
-ax1.set_xlabel('Number of Customer Service Calls')
-ax1.set_ylabel('Relative Frequency')
-ax1.legend(loc='upper right')
-
-# Display the plot in Streamlit
-st.pyplot(fig1)
-
-# Clear the figure
-fig1.clf()
-
-
-st.write("### **The Request: Create the python code to create an interactive histogram chart in streamlit.  There should be a selectionbox where the column in df_initial can be selected. The histogram would then update to show a histogram of the selected column.**")
-
-
-import streamlit as st
-import matplotlib.pyplot as plt
-import pandas as pd
-
-# Assuming df_initial is already populated
-# df_initial = pd.read_csv('your_data.csv')  # Example of loading the dataframe
-
-# List of columns to choose from
-columns = df_initial.columns.tolist()
-
-# Streamlit selection box
-selected_column = st.selectbox('Select column for histogram', columns)
-
-# Plot the histogram
-fig1, ax1 = plt.subplots()
-ax1.hist(df_initial[selected_column].dropna(), bins=30, edgecolor='k')
-ax1.set_title(f'Histogram of {selected_column}')
-ax1.set_xlabel(selected_column)
-ax1.set_ylabel('Frequency')
-
-# Display the plot in Streamlit
-st.pyplot(fig1)
-
-# Clear the figure
-fig1.clf()
-
-
-st.write("### **The Request: Create the python code to create an interactive scatter chart with the linear regression line overlay in streamlit.  There should be two selectionbox\'s where the x and y columns from df_initial can be selected. The chart would then update to show a scatter plot and regression line for the selected x and y columns.**")
-
-
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.linear_model import LinearRegression
-import numpy as np
-
-# Assuming df_initial is already populated
-# Uncomment the following line if you need to read the data
-# df_initial = pd.read_csv('your_data.csv')
-
-st.title('Scatter Plot with Regression Line')
-
-# Selection boxes for x and y axis
-x_col = st.selectbox('Select the X-axis column', df_initial.columns)
-y_col = st.selectbox('Select the Y-axis column', df_initial.columns)
-
-if x_col and y_col:
-    # Creating the plot
-    fig1, ax1 = plt.subplots()
-    
-    # Scatter plot
-    sns.scatterplot(data=df_initial, x=x_col, y=y_col, ax=ax1)
-    
-    # Linear Regression
-    X = df_initial[[x_col]].values
-    y = df_initial[y_col].values
-    reg = LinearRegression().fit(X, y)
-    y_pred = reg.predict(X)
-    
-    # Plotting the regression line
-    ax1.plot(df_initial[x_col], y_pred, color='red', linewidth=2)
-    ax1.set_title(f'Scatter plot of {x_col} vs {y_col} with Regression Line')
-    ax1.set_xlabel(x_col)
-    ax1.set_ylabel(y_col)
-
-    # Display the plot in Streamlit
-    st.pyplot(fig1)
-    
-    # Clear the figure after displaying
-    fig1.clf()
 
 

@@ -21,6 +21,7 @@ import io
 import pdb
 from shutil import copyfile
 import json
+from streamlit_mic_recorder import speech_to_text
 
 st.set_page_config(
     layout="wide",
@@ -120,6 +121,8 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
 
     Any request must use one or more of these columns from the data definition. Reply with the source code only. 
     """
+
+
 
     def extract_code_from_message(message):
         # pdb.set_trace()

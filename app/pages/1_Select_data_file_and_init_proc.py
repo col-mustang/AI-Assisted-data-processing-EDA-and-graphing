@@ -162,7 +162,7 @@ if 'df_initial_loaded' in st.session_state and st.session_state['df_initial_load
                 st.session_state['request_from_select_data_bool'] = True
                 if st.button("Request received... :blue[Click to produce graph(s)]"):
                     st.session_state['new_request'] = True
-                    st.switch_page(("pages/2 create_graphs.py"))
+                    st.switch_page(("pages/2_create_graphs.py"))
     else:
         st.write("### Could not initialize new graph file!")
        
