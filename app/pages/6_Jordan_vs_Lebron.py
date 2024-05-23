@@ -223,3 +223,58 @@ st.pyplot(fig1)
 fig1.clf()
 
 
+st.write("### **The Request: Generate a scatter plot with two series. Series 1: x= game_abs and y = \'fgp\' for Player = Jordan and Series 2: x= game_abs and y = \'fgp\' for Player = Lebron.  Use sklearn library to generate a regression line for both series. Annotate the regression lines with the Players. for Series 1 use red points and a black regression line. For Series 2, use blue points and a yellow regression line.**")
+
+
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Assuming df_initial is already defined and populated
+# Player = Jordan
+df_jordan = df_initial[df_initial['Player'] == 'Jordan']
+x_jordan = df_jordan[['game_abs']].values
+y_jordan = df_jordan['fgp'].values
+
+# Player = Lebron
+df_lebron = df_initial[df_initial['Player'] == 'Lebron']
+x_lebron = df_lebron[['game_abs']].values
+y_lebron = df_lebron['fgp'].values
+
+# Create scatter plot
+fig1, ax1 = plt.subplots()
+ax1.scatter(x_jordan, y_jordan, color='red', label='Jordan')
+ax1.scatter(x_lebron, y_lebron, color='blue', label='Lebron')
+
+# Regression for Jordan
+model_jordan = LinearRegression()
+model_jordan.fit(x_jordan, y_jordan)
+y_pred_jordan = model_jordan.predict(x_jordan)
+ax1.plot(x_jordan, y_pred_jordan, color='black', label='Jordan Regression Line')
+
+# Regression for Lebron
+model_lebron = LinearRegression()
+model_lebron.fit(x_lebron, y_lebron)
+y_pred_lebron = model_lebron.predict(x_lebron)
+ax1.plot(x_lebron, y_pred_lebron, color='yellow', label='Lebron Regression Line')
+
+# Annotate regression lines
+ax1.annotate('Jordan', xy=(x_jordan[-1], y_pred_jordan[-1]), xytext=(x_jordan[-1] + 10, y_pred_jordan[-1]),
+             arrowprops=dict(facecolor='black', shrink=0.05))
+ax1.annotate('Lebron', xy=(x_lebron[-1], y_pred_lebron[-1]), xytext=(x_lebron[-1] + 10, y_pred_lebron[-1]),
+             arrowprops=dict(facecolor='yellow', shrink=0.05))
+
+# Add labels and legend
+ax1.set_xlabel('game_abs')
+ax1.set_ylabel('fgp')
+ax1.legend()
+
+# Display plot in Streamlit
+st.pyplot(fig1)
+
+# Clear the figure
+fig1.clf()
+
+
