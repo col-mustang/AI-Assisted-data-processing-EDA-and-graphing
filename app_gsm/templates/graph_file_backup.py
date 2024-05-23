@@ -38,56 +38,133 @@ else:
 
 # new code below here
 
-st.write("""### **The Request: Generate a scatter plot with two series. Series 1: x= game_abs and y = pts for Player = Jordan and Series 2: x= game_abs and y = pts for Player = Lebron.  Use sklearn library to generate a regression line for both series. Annotate the regression lines with the Players.**""")
+st.write("### **The Request: Create a line graph with game ABS on the x-axis and fgp on the y-axis separated by player**")
 
 
 import streamlit as st
-import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
-import numpy as np
 
-# Filter data for Jordan and Lebron
-jordan_data = df_initial[df_initial['Player'] == 'Jordan']
-lebron_data = df_initial[df_initial['Player'] == 'Lebron']
+# Assuming df_initial is already defined and populated
 
-# Create the plot
+# Create a figure and an axis
 fig1, ax1 = plt.subplots()
 
-# Jordan scatter plot
-ax1.scatter(jordan_data['game_abs'], jordan_data['pts'], label='Jordan', color='blue')
+# Loop through each player and plot their data
+for player in df_initial['Player'].unique():
+    player_data = df_initial[df_initial['Player'] == player]
+    ax1.plot(player_data['game_abs'], player_data['fgp'], label=player)
 
-# Lebron scatter plot
-ax1.scatter(lebron_data['game_abs'], lebron_data['pts'], label='Lebron', color='red')
-
-# Regression for Jordan
-X_jordan = jordan_data['game_abs'].values.reshape(-1, 1)
-y_jordan = jordan_data['pts'].values.reshape(-1, 1)
-regressor_jordan = LinearRegression()
-regressor_jordan.fit(X_jordan, y_jordan)
-y_pred_jordan = regressor_jordan.predict(X_jordan)
-ax1.plot(jordan_data['game_abs'], y_pred_jordan, color='blue')
-ax1.annotate('Jordan', xy=(jordan_data['game_abs'].iloc[-1], y_pred_jordan[-1]), color='blue')
-
-# Regression for Lebron
-X_lebron = lebron_data['game_abs'].values.reshape(-1, 1)
-y_lebron = lebron_data['pts'].values.reshape(-1, 1)
-regressor_lebron = LinearRegression()
-regressor_lebron.fit(X_lebron, y_lebron)
-y_pred_lebron = regressor_lebron.predict(X_lebron)
-ax1.plot(lebron_data['game_abs'], y_pred_lebron, color='red')
-ax1.annotate('Lebron', xy=(lebron_data['game_abs'].iloc[-1], y_pred_lebron[-1]), color='red')
-
-# Add legend and labels
+# Add labels and title
+ax1.set_xlabel('Game ABS')
+ax1.set_ylabel('FGP')
+ax1.set_title('Field Goal Percentage Over Games by Player')
 ax1.legend()
-ax1.set_xlabel('Game Absolute')
-ax1.set_ylabel('Points')
-ax1.set_title('Points by Game Absolute for Jordan and Lebron')
 
 # Display the plot in Streamlit
 st.pyplot(fig1)
 
-# Clear the figure to free memory
+# Clear the figure after displaying
+fig1.clf()
+
+
+st.write("### **The Request: Create a line graph with game ABS on the x-axis and fgp on the y-axis separated by player**")
+
+
+import streamlit as st
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Assuming df_initial is already populated and available
+df = df_initial.copy()
+
+# Create a figure and axis
+fig1, ax1 = plt.subplots()
+
+# Loop through each player and plot their data
+players = df['Player'].unique()
+for player in players:
+    player_data = df[df['Player'] == player]
+    ax1.plot(player_data['game_abs'], player_data['fgp'], label=player)
+
+# Set the labels and title
+ax1.set_xlabel('Game ABS')
+ax1.set_ylabel('FGP')
+ax1.set_title('FGP over Game ABS by Player')
+ax1.legend()
+
+# Display the plot in Streamlit
+st.pyplot(fig1)
+
+# Clear the figure
+fig1.clf()
+
+
+st.write("### **The Request: Create a line graph with game ABS on the x-axis and fgp on the y-axis separated by player**")
+
+
+import streamlit as st
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Assuming df_initial is already populated and available.
+
+# Create the plot
+fig1, ax1 = plt.subplots()
+
+# Plot each player's data
+for player in df_initial['Player'].unique():
+    player_data = df_initial[df_initial['Player'] == player]
+    ax1.plot(player_data['game_abs'], player_data['fgp'], label=player)
+
+# Set plot title and labels
+ax1.set_title('Field Goal Percentage (FG%) Over Games')
+ax1.set_xlabel('Game ABS')
+ax1.set_ylabel('FG%')
+
+# Add legend
+ax1.legend(title='Player')
+
+# Display the plot in Streamlit
+st.pyplot(fig1)
+
+# Clear the figure after displaying
+fig1.clf()
+
+
+st.write("### **The Request: Create a line graph with game ABS on the x-axis and 3p on the y-axis separated by player**")
+
+
+import streamlit as st
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Assuming df_initial is already populated
+# Example of how df_initial might look like:
+# df_initial = pd.DataFrame({
+#     'Player': ['A', 'A', 'B', 'B'],
+#     'game_abs': [1, 2, 1, 2],
+#     'threep': [0.3, 0.4, 0.5, 0.6]
+# })
+
+# Create the plot
+fig1, ax1 = plt.subplots()
+
+# Filtering the data and plotting
+players = df_initial['Player'].unique()
+for player in players:
+    player_data = df_initial[df_initial['Player'] == player]
+    ax1.plot(player_data['game_abs'], player_data['threep'], label=player)
+
+# Adding labels and title
+ax1.set_xlabel('Game ABS')
+ax1.set_ylabel('3P')
+ax1.set_title('3P Percentage by Game ABS for Each Player')
+ax1.legend()
+
+# Display the plot using Streamlit
+st.pyplot(fig1)
+
+# Clear the figure
 fig1.clf()
 
 

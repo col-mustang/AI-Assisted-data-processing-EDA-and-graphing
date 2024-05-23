@@ -174,7 +174,7 @@ if 'df_initial_loaded' in st.session_state and st.session_state['df_initial_load
             st.write("### Or use voice input")
             
             with st.form(key='my_form'):
-                if st.form_submit_button("Start Recording"):
+                if st.form_submit_button("Click to open. Click again to submit recording."):
                     speech_recognition()
             
             if 'text_received' in st.session_state and st.session_state['text_received']:

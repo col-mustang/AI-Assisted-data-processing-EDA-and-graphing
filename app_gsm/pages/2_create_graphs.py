@@ -64,11 +64,21 @@ if 'df_definition' in  st.session_state:
         else:
             # in this 'else' case, we have no request to process from the 'Select Data...' page, so get user input for new request
             # Get user input for new request
-            st.write("Enter your next graphing request here")
+            st.write("Enter your next graphing request here or click below to provide a voice prompt.")
 
             with st.form(key='voice_form'):
-                if st.form_submit_button("Start Recording"):
-                    speech_recognition()
+                if st.form_submit_button("Click to open. Click again to submit recording."):
+                    text = speech_to_text(language='en', use_container_width=True, just_once=False, key='STT')    
+                    if 'text_received' not in st.session_state:    
+                        st.session_state['text_received'] = []      
+                    # text = speech_to_text(language='en', use_container_width=True, just_once=False, key='STT')   
+                    print(st.session_state)
+                    if text:    
+                        st.session_state['text_received'].append(text)  
+                        for text in st.session_state['text_received']:      
+                            st.text(text)    
+                    else:  
+                        st.write("No text transcribed.") 
 
             g_new_request = st.text_area("")
 
@@ -136,18 +146,18 @@ if ('the_request' in st.session_state) and ('df_definition' in st.session_state)
     Any request must use one or more of these columns from the data definition. Reply with the source code only. 
     """
 
-    def speech_recognition(): 
-        text = speech_to_text(language='en', use_container_width=True, just_once=False, key='STT')    
-        if 'text_received' not in st.session_state:    
-            st.session_state['text_received'] = []      
-        # text = speech_to_text(language='en', use_container_width=True, just_once=False, key='STT')   
-        print(st.session_state)
-        if text:    
-            st.session_state['text_received'].append(text)  
-            for text in st.session_state['text_received']:      
-                st.text(text)    
-        else:  
-            st.write("No text transcribed.") 
+    # def speech_recognition(): 
+    #     text = speech_to_text(language='en', use_container_width=True, just_once=False, key='STT')    
+    #     if 'text_received' not in st.session_state:    
+    #         st.session_state['text_received'] = []      
+    #     # text = speech_to_text(language='en', use_container_width=True, just_once=False, key='STT')   
+    #     print(st.session_state)
+    #     if text:    
+    #         st.session_state['text_received'].append(text)  
+    #         for text in st.session_state['text_received']:      
+    #             st.text(text)    
+    #     else:  
+    #         st.write("No text transcribed.") 
 
 
     def extract_code_from_message(message):
