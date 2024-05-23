@@ -1,9 +1,10 @@
-## AI_Course_Project_3_Team_1
-AI Assisted data processing, EDA and graphing
+# AI_Course_Project_3_Team_1
+
+## AI Assisted Data Processing, EDA, and Graphing
 
 ## Introduction
 
-Welcome to our project repository! This project aims to create a user-friendly, web-based application that facilitates automatic generation of custom graphs for any given tabular dataset through simple voice commands or text prompts. This technology will enable users to engage with data analysis in a more intuitive and efficient manner, significantly reducing the manual effort involved in data processing. Our focus has been on [mention the broad technology or approach used, like machine learning, NLP, etc.] to achieve [specific objectives or outcomes].
+Welcome to our project repository! This project aims to create a user-friendly, web-based application that facilitates automatic generation of custom graphs for any given tabular dataset through simple voice commands or text prompts. This technology will enable users to engage with data analysis in a more intuitive and efficient manner, significantly reducing the manual effort involved in data processing. Our focus has been on machine learning and natural language processing (NLP) to achieve seamless data visualization and interaction.
 
 ## Table of Contents
 
@@ -12,105 +13,109 @@ Welcome to our project repository! This project aims to create a user-friendly, 
 - [Model Implementation and Optimization](#model-implementation-and-optimization)
 - [Results](#results)
 - [Future Work](#future-work)
-- [Authors](#Authors)
-- [Acknowledgments](#Acknowledgments)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgments)
 
 ## Built With
-- Visual Studio Code - The source code editor used for development.
-- GitHub Copilot - AI assistant that helps in writing better code.
-- ChatGPT - AI model for generating documentation and guidance.
-- Perplexity - AI assistant that helps generate and write cleaner code.
-- Streamlit - Web framework is specifically tailored for data science applications, allowing Python developers to easily build and deploy web applications. Streamlit will serve as the foundation for our web-based interface, ensuring a seamless user experience.
+- **Visual Studio Code** - Source code editor used for development.
+- **GitHub Copilot** - AI assistant that helps in writing better code.
+- **ChatGPT** - AI model for generating documentation and guidance.
+- **Perplexity** - AI assistant that helps generate and write cleaner code.
+- **Streamlit** - Web framework tailored for data science applications, allowing Python developers to easily build and deploy web applications. Streamlit serves as the foundation for our web-based interface, ensuring a seamless user experience.
 
 ## Location of the Code and Write Up
 
-The file is in the root directory of the Git repository. The file name is "Main_Page_for_Plotly.py. 
+The main file is located in the root directory of the Git repository. The file name is `Main_Page_for_Plotly.py`.
 
 ## Getting Started
 
-The steps below should get you started to get this project up and running on your local machine.
+Follow the steps below to get this project up and running on your local machine.
+```sh
 $ streamlit run "Main_Page_for_Plotly.py"
+```
 
 ### Prerequisites
 
-The following are prerequisites for this project. Instructions for pip installation are provided for each of the packages.
+The following are prerequisites for this project. Instructions for pip installation are provided for each package.
 
-* Python - This project was created using Python version 3.11.5. Package compatability has not been tested with other versions of Python. See https://www.digitalocean.com/community/tutorials/install-python-windows-10 as a reference for Python installation.
+- **Python** - This project was created using Python version 3.11.5. Package compatibility has not been tested with other versions of Python. Refer to this [DigitalOcean tutorial](https://www.digitalocean.com/community/tutorials/install-python-windows-10) for Python installation.
 
-* Stremlit
+- **Streamlit**
   ```sh
   pip install streamlit
   ```
 
-* Steamlit mic recorder
+- **Streamlit Mic Recorder**
   ```sh
   pip install streamlit-mic-recorder
   ```
-  
-* pandas 
+
+- **Pandas**
   ```sh
   pip install pandas
   ```
-* tensorflow 
+
+- **TensorFlow**
   ```sh
-  pip install tensorflow[and-cuda] - if using a compatable GPU
-
-  or 
-
-  pip install tensorflow-cpu - if using only your cpu
+  pip install tensorflow[and-cuda]  # if using a compatible GPU
+  # or
+  pip install tensorflow-cpu  # if using only your CPU
   ```
-* sklearn 
+
+- **Scikit-learn**
   ```sh
   pip install -U scikit-learn
-  Note: scikit-lean installation encourages the use of a virtual environment. See https://scikit-learn.org/stable/install.html
+  # Note: Scikit-learn installation encourages the use of a virtual environment. See https://scikit-learn.org/stable/install.html
   ```
-* numpy 
+
+- **Numpy**
   ```sh
   pip install numpy
   ```
-* keras 
+
+- **Keras**
   ```sh
-  keras will be automatically installed when you install tensorflow. While it can be installed separately, it is recommended to just use the pip installation of tensor flow to install keras.
+  # Keras will be automatically installed when you install TensorFlow.
   ```
+
 ### Installation and Running
 
-_In addition to setting up Python and the required packages, perform the following steps._
+In addition to setting up Python and the required packages, perform the following steps.
 
-1. Clone the repository on your local machine
+1. Clone the repository on your local machine:
    ```sh
-   git clone https://github.com/DougInVentura/AI_Course_Project_3_Team_1)
+   git clone https://github.com/DougInVentura/AI_Course_Project_3_Team_1
    ```
-2. Open the folder corresponding to app where you installed in using the repo clone above.
 
-3. Open the file "Main_Page_for_Plotly.py"
+2. Open the folder corresponding to the app where you installed it using the repo clone above.
 
-4. Make the modifications you desired. Run cell by cell or run the entire Jupyter notebook.
+3. Open the file `Main_Page_for_Plotly.py`.
+
+4. Make the desired modifications. Run cell by cell or run the entire Jupyter notebook.
+
 ## Data Collection and Cleaning
 
-Describe the sources of your data and the methodology used to clean and preprocess it. This section could include:
+Describe the sources of your data and the methodology used to clean and preprocess it. This section includes:
 - Data sources
 - Key steps in data cleaning and preprocessing
 - Exporting the cleaned data for modeling
 
 ## Model Implementation and Optimization
 
-This section explains the model(s) used, including any additional libraries or technologies that were incorporated beyond the class syllabus. It should cover:
+This section explains the model(s) used, including any additional libraries or technologies that were incorporated beyond the class syllabus. It covers:
 - Description of the initial model setup and rationale
 - Iterative improvements and optimizations made
 - Final model configuration and performance metrics
 
 ## Visualizations
+
 3D Plotting 
 
-![image](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/168fb6df-ace1-4ece-9c68-793fab614450)
+![3D Plot](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/168fb6df-ace1-4ece-9c68-793fab614450)
 
-![image](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/c5c5dc4c-9741-4f9f-92d9-c8a9057752ae)
-
+![Graph](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/c5c5dc4c-9741-4f9f-92d9-c8a9057752ae)
 
 ## Results
-
-[
-](https://cdgproject3plotly.streamlit.app/)
 
 Summarize the model's performance and the conclusions drawn from applying the model to your data. Include key metrics that highlight the model's effectiveness.
 
@@ -122,12 +127,15 @@ Discuss potential improvements or next steps for the project if more time and re
 - Deploying the model as a web or mobile application
 
 ## Authors
-- Chris Alvarez - Presenation visualization, Data collection, preprocessing, and application deployment
-- Doug Francis - Feature/data engineering, model evaluation, model deployment, and documentation
-- Geoff McDaniel - Feature/data engineering, model evaluation, and voice capture widget deployment
-  
+
+- **Chris Alvarez** - Presentation visualization, data collection, preprocessing, and application deployment
+- **Doug Francis** - Feature/data engineering, model evaluation, model deployment, and documentation
+- **Geoff McDaniel** - Feature/data engineering, model evaluation, and voice capture widget deployment
+
 ## License
-This project is not licensed and is available for educational and non-commercial use only
+
+This project is not licensed and is available for educational and non-commercial use only.
 
 ## Acknowledgments
-Big shoutout to our instructor Firas, and of course, Sean, for their awesome support with our project. Our profs laid down the basics, making sure we got the hang of what we needed for Project 3. All together, they've been the dream team behind our data analysis skills, and we couldn't be more grateful.
+
+Big shoutout to our instructor Firas, and of course, Sean, for their awesome support with our project. Our professors laid down the basics, making sure we got the hang of what we needed for Project 3. All together, they've been the dream team behind our data analysis skills, and we couldn't be more grateful.
