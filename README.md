@@ -115,6 +115,18 @@ This section explains the model(s) used, including any additional libraries or t
 
 ![Graph](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/c5c5dc4c-9741-4f9f-92d9-c8a9057752ae)
 
+Streamlit Automated Graphing
+
+![Screenshot 2024-05-22 at 7 14 32 PM](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/cc39a366-2042-444d-9eed-cf81c00da7a7)
+
+![Screenshot 2024-05-22 at 7 14 47 PM](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/56976753-fcc9-43ad-85d0-05e84d7a527c)
+
+![Screenshot 2024-05-22 at 7 15 18 PM](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/feb968fb-d651-49cb-a444-d6b90e534bcb)
+
+![Screenshot 2024-05-22 at 7 15 37 PM](https://github.com/DougInVentura/AI_Course_Project_3_Team_1/assets/153215625/0d7264c7-1f3b-46a7-bb23-50e39ee2edff)
+
+
+
 ## Results
 
 Summarize the model's performance and the conclusions drawn from applying the model to your data. Include key metrics that highlight the model's effectiveness.
