@@ -90,84 +90,21 @@ In addition to setting up Python and the required packages, perform the followin
 
 2. Open the folder corresponding to the app where you installed it using the repo clone above.
 
-3. Follow the Usage Instructions below
+3. Follow the Usage Instructions in the app/data directory titled "Plotly Usage Instructions.docx"
 
-## Usage Instructions
+## Data Collection
 
-### Plotly Usage Instructions
-**Project 3: ASU AI Course.**
-**Team: Chris Alvarez, Geoff McDaniel, and Doug Francis**
-
-1. **Run the Application**
-   - In your terminal, navigate to the directory containing the file `main_page_for_plotly.py`.
-   - Execute the following command and hit enter:
-     ```sh
-     streamlit run "Main_Page_for_plotly.py"
-     ```
-   - Your browser should open (tested in Chrome) and display the application interface.
-
-2. **Select the Data File**
-   - Click on the button labeled "Click Here to select...".
-   - On the next screen, click the "Browse file" button.
-   - Navigate to the directory containing your clean CSV file (note: only CSV files are supported, no XLSX files).
-   - Select the file and click "Open".
-     - Ensure the table format is "tall" (normalized database table or tall CSV format).
-
-3. **View Dataframe**
-   - After loading the data, a scrollable view of your dataframe will be displayed.
-   - Below the dataframe, you will see two buttons:
-     - **Left Button**: View dataframe info (equivalent to `df.info()` in Python).
-     - **Right Button**: View the shape of the data or the value counts.
-
-4. **Specify a Graphing File (Optional)**
-   - If you do not want to use the default graphing page (`3_the_graphs.py`), you can specify a new graphing file name.
-     - Requirements for the file name:
-       - Must start with a number followed by an underscore.
-       - Should end in `.py`.
-       - Use only letters or digits after the digit-underscore and before the `.py` extension.
-     - After typing the file name, hit `Control-Enter`.
-     - You may need to click on the "Enter your graphing request" text input area for the action to start.
-
-5. **Enter Your Graphing Request**
-   - Enter your graphing request in the input area. Note: Prompt engineering is important. Use single quotes, but NO DOUBLE QUOTES.
-   - Example requests:
-     - Generate a stacked bar chart of counts of `payment_method`. The bottom part of the stacked bar should be for `churn=0` versus the top of the stacked bar should be for `churn=1`.
-     - Create histograms for `tenure`, `number_customer_service_calls`, and `internet_charge_per_min`. For `internet_charge_per_min`, limit the x-axis to 0.03.
-     - Create overlapping histograms for `number_customer_service_calls` for `churn=0` versus `churn=1`. Convert the data to relative frequency due to the larger number of rows where `churn=0`.
-     - Generate overlapping histograms for the variable `fgp` for `Player = Jordan` versus `Player = Lebron`. Add an annotation for the average `fgp` for `Player = Jordan` versus average `fgp` for `Player = Lebron`.
-     - Generate a scatter plot with two series. Series 1: `x= game_abs` and `y = pts` for `Player = Jordan` and Series 2: `x= game_abs` and `y = pts` for `Player = Lebron`. Use `sklearn` library to generate a regression line for both series. Annotate the regression lines with the Players.
-   - After typing your request, hit `Control-Enter`.
-
-6. **Generate the Graph**
-   - After entering your request and hitting `Control-Enter`, a button labeled "Request Received... Click to Produce graph(s)" will appear.
-   - Click on this button to generate your chart.
-
-7. **View and Manage Graphs**
-   - This will take you to the `create_graphs` page.
-   - You have the option to:
-     - Click on "Click to view the page with the graphs" to view the generated graphs.
-     - Click on "Click to generate another graph" to create additional graphs.
-   - If the default graphing file was used, you will see the `the_graphs` page with your requested graphs.
-   - Use the buttons on the graphing page to view dataframe information, shape, and value counts.
-
-8. **Iterate Graph Requests**
-   - Use the gray sidebar on the left-hand side of the screen to select "Create graphs" for creating more graphs.
-   - If the sidebar is hidden, click the arrow on the upper left corner to show it.
-   - Enter a new graphing request and hit `Control-Enter`.
-   - To view your new graph, select `the graphs` from the sidebar.
-
-9. **Quit the Application**
-   - When you are done, hit `Control-C` in your terminal to quit the application.
-   - After executing `Control-C`, close the web page in the browser.
-
-By following these steps, you will be able to effectively use the application to generate and view custom graphs based on your dataset.
-
-## Data Collection and Cleaning
-
-Describe the sources of your data and the methodology used to clean and preprocess it. This section includes:
 - Data sources
-- Key steps in data cleaning and preprocessing
-- Exporting the cleaned data for modeling
+Various data sources were used in this process. However, this project was more about developing a automated graphing application rather than a model.
+
+Data sources used for development include
+-churn_clean.csv
+-jordan vs Lebron.csv
+-jordan vs leborn2.csv
+-labtops.csv
+-winequality-red fixed.csv
+
+All data sources are in the main repo app/data directory
 
 ## Model Implementation and Optimization
 
