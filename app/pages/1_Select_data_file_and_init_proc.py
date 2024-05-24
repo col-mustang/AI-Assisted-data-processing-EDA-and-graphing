@@ -10,7 +10,7 @@ import io
 import pdb
 import time
 from shutil import copyfile
-
+from streamlit_mic_recorder import speech_to_text
 
 st.set_page_config(
     layout="wide",
@@ -67,6 +67,18 @@ def clean_up_graph_f_name(f_name_to_clean):
         st.write(f"## Invalid file name: {f_name_to_clean}. Must start with a digit and underscore. Could not initialize new graph file")
         return(False,"")
 
+def speech_recognition(): 
+    text = speech_to_text(language='en', use_container_width=True, just_once=False, key='STT')    
+    if 'text_received' not in st.session_state:    
+        st.session_state['text_received'] = []      
+    # text = speech_to_text(language='en', use_container_width=True, just_once=False, key='STT')   
+    print(st.session_state)
+    if text:    
+        st.session_state['text_received'].append(text)  
+        for text in st.session_state['text_received']:      
+            st.text(text)    
+    else:  
+        st.write("No text transcribed.") 
 ## ---- Main Flow -----------
 
 # initialize variables
@@ -155,10 +167,23 @@ if 'df_initial_loaded' in st.session_state and st.session_state['df_initial_load
         # Get the graphing request
         the_request = ""  # initialize first to empty string
         with col2:
-            the_request = st.text_area("Enter your graphing request here")
+            st.write("Enter your graphing request here")
+            
+            the_request = st.text_area("")
+            st.write("### Or use voice input")
+            
+            with st.form(key='my_form'):
+                if st.form_submit_button("Click to open. Click again to submit recording."):
+                    speech_recognition()
+            
+            if 'text_received' in st.session_state and st.session_state['text_received']:
+                text = st.session_state['text_received'][-1]
+                if isinstance(text, str) and len(text) > 0:
+                    st.session_state['voice_request'] = text
+                    st.write(f"Recorded Request: {text}")
+                    the_request = text  # Use the voice input as the request
+            
             if len(the_request) > 0:
-                # pdb.set_trace()
-                the_request = the_request.strip()
                 st.session_state['the_request_from_select_data'] = the_request
                 st.session_state['request_from_select_data_bool'] = True
                 if st.button("Request received... :blue[Click to produce graph(s)]"):

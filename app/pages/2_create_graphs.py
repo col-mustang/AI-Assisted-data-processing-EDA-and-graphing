@@ -68,10 +68,32 @@ if 'df_definition' in  st.session_state:
                 # no need to do anything here. The button click will cause the page to rerun and that is all that is needed.
                 st.write("Reinitiaing page")
         else:
-            # in this 'else' case, we have no request to process from the 'Select Data...' page, so get user input for new request
-            g_new_request = st.text_area("Enter your next graphing request here")
+            # Get user input for new request
+            st.write("Enter your next graphing request here or click below to provide a voice prompt.")
+
+            with st.form(key='voice_form'):
+                if st.form_submit_button("Click to open. Click again to submit recording."):
+                    text = speech_to_text(language='en', use_container_width=True, just_once=False, key='STT')    
+                    if 'text_received' not in st.session_state:    
+                        st.session_state['text_received'] = []      
+                    # text = speech_to_text(language='en', use_container_width=True, just_once=False, key='STT')   
+                    print(st.session_state)
+                    if text:    
+                        st.session_state['text_received'].append(text)  
+                        for text in st.session_state['text_received']:      
+                            st.text(text)    
+                    else:  
+                        st.write("No text transcribed.") 
+
+            g_new_request = st.text_area("")
+
+            if 'text_received' in st.session_state and st.session_state['text_received']:
+                text = st.session_state['text_received'][-1]
+                if isinstance(text, str) and len(text) > 0:
+                    st.session_state['voice_request'] = text
+                    st.write(f"Recorded Request: {text}")
+                    g_new_request = text  # Use the voice input as the request
             if len(g_new_request) > 0:
-                g_new_request = g_new_request.strip()
                 st.session_state['new_request'] = True
                 st.session_state['the_request'] = g_new_request
             # on this branch, we give the user a chance to drop the last code block in the graph file

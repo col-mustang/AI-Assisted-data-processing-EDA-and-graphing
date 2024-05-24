@@ -38,37 +38,54 @@ else:
 
 # new code below here
 
-st.write("### **The Request: Generate overlapping histograms for the variable \'fgp\' for Player = Jordan versus Player = Lebron. Add an annotation for the average \'fgp\' for Player = Jordan versus average \'fgp\' for Player = Lebron.**")
+st.write("### **The Request: Create a histogram with game ABS on the x-axis and field goal percentage on the y-axis separated by player**")
+
+
+import matplotlib.pyplot as plt
+import streamlit as st
+import pandas as pd
+
+# Assuming df_initial is already defined and populated
+fig1, ax1 = plt.subplots()
+
+# Create a histogram with game_abs on the x-axis and field goal percentage on the y-axis, separated by player
+players = df_initial['Player'].unique()
+
+for player in players:
+    player_data = df_initial[df_initial['Player'] == player]
+    ax1.hist(player_data['game_abs'], weights=player_data['fgp'], alpha=0.5, label=player)
+
+ax1.set_xlabel('Game ABS')
+ax1.set_ylabel('Field Goal Percentage')
+ax1.legend(title='Player')
+ax1.set_title('Field Goal Percentage by Game ABS for Each Player')
+
+st.pyplot(fig1)
+fig1.clf()
+
+
+st.write("### **The Request: Create a histogram with game ABS on the x-axis and field goal percentage on the y-axis separated by player**")
 
 
 import streamlit as st
 import matplotlib.pyplot as plt
 
-# Filter data for Jordan and Lebron
-df_jordan = df_initial[df_initial['Player'] == 'Jordan']
-df_lebron = df_initial[df_initial['Player'] == 'Lebron']
-
-# Calculate average 'fgp' for both players
-avg_fgp_jordan = df_jordan['fgp'].mean()
-avg_fgp_lebron = df_lebron['fgp'].mean()
+# Create a new dataframe from df_initial to filter out the required columns
+df_filtered = df_initial[['Player', 'game_abs', 'fgp']]
 
 # Create the plot
 fig1, ax1 = plt.subplots()
 
-# Plot histograms
-ax1.hist(df_jordan['fgp'], bins=20, alpha=0.5, label='Jordan')
-ax1.hist(df_lebron['fgp'], bins=20, alpha=0.5, label='Lebron')
+# Loop through each player and plot their data
+players = df_filtered['Player'].unique()
+for player in players:
+    player_data = df_filtered[df_filtered['Player'] == player]
+    ax1.plot(player_data['game_abs'], player_data['fgp'], label=player)
 
-# Add annotations for the averages
-ax1.axvline(avg_fgp_jordan, color='blue', linestyle='dashed', linewidth=1)
-ax1.axvline(avg_fgp_lebron, color='orange', linestyle='dashed', linewidth=1)
-ax1.text(avg_fgp_jordan, plt.ylim()[1]*0.9, f'Avg Jordan: {avg_fgp_jordan:.2f}', color='blue')
-ax1.text(avg_fgp_lebron, plt.ylim()[1]*0.8, f'Avg Lebron: {avg_fgp_lebron:.2f}', color='orange')
-
-# Labels and title
-ax1.set_xlabel('Field Goal Percentage')
-ax1.set_ylabel('Frequency')
-ax1.set_title('Field Goal Percentage - Jordan vs Lebron')
+# Adding labels and title
+ax1.set_xlabel('Game ABS')
+ax1.set_ylabel('Field Goal Percentage')
+ax1.set_title('Field Goal Percentage by Game ABS for Each Player')
 ax1.legend()
 
 # Display the plot in Streamlit
@@ -78,32 +95,68 @@ st.pyplot(fig1)
 fig1.clf()
 
 
-st.write("### **The Request: Type in your new request here, then hit control enter.**")
+st.write("### **The Request: Create a histogram with game ABS on the x-axis and field goal percentage on the y-axis separated by player**")
 
 
 import streamlit as st
 import matplotlib.pyplot as plt
 
-# Sample data for df_initial
-import pandas as pd
-data = {
-    'Player': ['Player1', 'Player2', 'Player3', 'Player4'],
-    'pts': [20, 15, 25, 10],
-    'ast': [7, 9, 5, 12]
-}
-df_initial = pd.DataFrame(data)
+# Create a unique list of players
+players = df_initial['Player'].unique()
 
-# Plotting
-fig1, ax1 = plt.subplots()
-ax1.bar(df_initial['Player'], df_initial['pts'], label='Points')
-ax1.bar(df_initial['Player'], df_initial['ast'], bottom=df_initial['pts'], label='Assists')
+# Create subplots for each player
+fig1, ax1 = plt.subplots(len(players), 1, figsize=(10, 6 * len(players)), sharex=True)
 
-ax1.set_xlabel('Player')
-ax1.set_ylabel('Total')
-ax1.set_title('Points and Assists by Player')
-ax1.legend()
+# If there's only one player, ax1 won't be an array
+if len(players) == 1:
+    ax1 = [ax1]
 
+# Plot histogram for each player
+for i, player in enumerate(players):
+    player_data = df_initial[df_initial['Player'] == player]
+    ax1[i].hist(player_data['game_abs'], weights=player_data['fgp'], bins=20, alpha=0.7)
+    ax1[i].set_title(f"{player}'s Field Goal Percentage by Game ABS")
+    ax1[i].set_xlabel('Game ABS')
+    ax1[i].set_ylabel('Field Goal Percentage')
+
+# Display the plot using Streamlit
 st.pyplot(fig1)
+
+# Clear the figure after display
+fig1.clf()
+
+
+st.write("### **The Request: Create a histogram with game ABS on the x-axis and 3p on the y-axis separated by player**")
+
+
+import streamlit as st
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Assuming df_initial is already populated and available
+df_initial = pd.read_csv('path_to_your_csv_file.csv')  # Replace with the actual path to your data
+
+# Filter the necessary columns
+df_filtered = df_initial[['Player', 'game_abs', 'three']]
+
+# Create the plot
+fig1, ax1 = plt.subplots()
+
+# Plotting the histogram for each player
+players = df_filtered['Player'].unique()
+for player in players:
+    player_data = df_filtered[df_filtered['Player'] == player]
+    ax1.hist(player_data['game_abs'], weights=player_data['three'], alpha=0.5, label=player)
+
+ax1.set_xlabel('Game ABS')
+ax1.set_ylabel('3P')
+ax1.legend(title='Player')
+ax1.set_title('Histogram of 3P by Game ABS for each Player')
+
+# Display the plot in Streamlit
+st.pyplot(fig1)
+
+# Clear the figure
 fig1.clf()
 
 
