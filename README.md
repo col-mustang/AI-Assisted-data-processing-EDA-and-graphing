@@ -98,11 +98,11 @@ In addition to setting up Python and the required packages, perform the followin
 Various data sources were used in this process. However, this project was more about developing a automated graphing application rather than a model.
 
 Data sources used for development include
--churn_clean.csv
--jordan vs Lebron.csv
--jordan vs leborn2.csv
--labtops.csv
--winequality-red fixed.csv
+- churn_clean.csv
+- jordan vs Lebron.csv
+- jordan vs leborn2.csv
+- labtops.csv
+- winequality-red fixed.csv
 
 All data sources are in the main repo app/data directory
 
