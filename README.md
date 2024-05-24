@@ -11,12 +11,11 @@ Welcome to our project repository! This project aims to create a user-friendly, 
 - [Project Setup](#project-setup)
 - [Data Collection and Cleaning](#data-collection-and-cleaning)
 - [Model Implementation and Optimization](#model-implementation-and-optimization)
-- [Results](#results)
+- [Usage Instructions](#usage-instructions)
 - [Future Work](#future-work)
 - [Authors](#authors)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
-- [Usage Instructions](#usage-instructions)
 
 ## Built With
 - **Visual Studio Code** - Source code editor used for development.
