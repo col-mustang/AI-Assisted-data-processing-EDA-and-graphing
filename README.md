@@ -23,6 +23,9 @@ Welcome to our project repository! This project aims to create a user-friendly, 
 - **ChatGPT** - AI model for generating documentation and guidance.
 - **Perplexity** - AI assistant that helps generate and write cleaner code.
 - **Streamlit** - Web framework tailored for data science applications, allowing Python developers to easily build and deploy web applications. Streamlit serves as the foundation for our web-based interface, ensuring a seamless user experience.
+- **Canva** - Used for live slideshow presentation.
+
+- PowerPoint link (https://www.canva.com/design/DAGFWfztwLY/PEkUNIX4wwan-Fl_UReDIQ/view?utm_content=DAGFWfztwLY&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
 ## Location of the Code and Write Up
 
