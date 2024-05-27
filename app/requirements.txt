@@ -360,9 +360,6 @@ tblib==1.7.0
 tenacity==8.2.2
 tensorboard==2.16.2
 tensorboard-data-server==0.7.2
-tensorflow==2.16.1
-tensorflow-intel==2.16.1
-tensorflow-io-gcs-filesystem==0.31.0
 termcolor==2.4.0
 terminado==0.17.1
 text-unidecode==1.3
