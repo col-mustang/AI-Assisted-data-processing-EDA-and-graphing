@@ -356,7 +356,6 @@ streamlit_mic_recorder==0.0.8
 sympy==1.11.1
 tables==3.8.0
 tabulate==0.8.10
-TBB==0.2
 tblib==1.7.0
 tenacity==8.2.2
 tensorboard==2.16.2
