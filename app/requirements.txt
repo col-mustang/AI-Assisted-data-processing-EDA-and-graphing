@@ -1,6 +1,5 @@
 streamlit
 streamlit_mic_recorder
-os
 io
 pdb
 time
