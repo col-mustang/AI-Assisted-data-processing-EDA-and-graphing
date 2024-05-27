@@ -418,4 +418,3 @@ yarl==1.8.1
 ypy-websocket==0.8.2
 zict==2.2.0
 zipp==3.11.0
-zope.interface==5.4.0
