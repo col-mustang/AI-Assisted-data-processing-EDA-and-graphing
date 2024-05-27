@@ -322,7 +322,6 @@ semantic-version==2.10.0
 Send2Trash==1.8.0
 service-identity==18.1.0
 setuptools==68.0.0
-setuptools.dep_util
 shapely==2.0.2
 shellingham==1.5.4
 sip==6.6.2
