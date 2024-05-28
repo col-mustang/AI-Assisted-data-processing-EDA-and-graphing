@@ -159,7 +159,7 @@ kt-legacy==1.0.5
 langchain
 langcodes==3.3.0
 langgraph==0.0.55
-langsmith==0.0.83
+langsmith
 lazy_loader==0.2
 lazy-object-proxy==1.6.0
 libclang==18.1.1
