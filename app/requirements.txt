@@ -163,7 +163,7 @@ langchain-openai==0.1.6
 langchain-text-splitters==0.0.1
 langcodes==3.3.0
 langgraph==0.0.55
-langsmith==0.1.54
+langsmith==0.0.83
 lazy_loader==0.2
 lazy-object-proxy==1.6.0
 libclang==18.1.1
