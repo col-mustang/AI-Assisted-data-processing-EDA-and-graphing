@@ -157,7 +157,6 @@ keyring==23.13.1
 kiwisolver==1.4.4
 kt-legacy==1.0.5
 langchain==0.1.2
-langchain-community==0.0.37
 langchain-core==0.1.51
 langchain-openai==0.1.6
 langchain-text-splitters==0.0.1
